@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { Observable } from 'rxjs';
 import { User } from 'src/app/data/interfaces/user';
 
 @Component({
@@ -7,5 +8,5 @@ import { User } from 'src/app/data/interfaces/user';
   styleUrls: ['./users-list.component.scss']
 })
 export class UsersListComponent {
-  @Input() users: User[] = [];
+  @Input() users$!: Observable<User[]>;
 }
