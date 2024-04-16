@@ -11,32 +11,15 @@ import { selectPage } from 'src/app/states/page/page.selector';
   styleUrls: ['./pagination.component.scss'],
 })
 export class PaginationComponent {
-  @Input() pages: number[] = [1, 2, 3, 4]
-  @ViewChild('nextButton') nextButton!: ElementRef<HTMLButtonElement>;
-  @ViewChild('previousButton') previousButton!: ElementRef;
+  @Input() pages: number[] = [1, 2, 3, 4];
   page$: Observable<number>;
+  currentPage!: number;
 
 
   constructor(private store: Store<AppState>) {
     this.page$ = this.store.select(selectPage);
-  }
-  ngAfterViewInit() {
-    this.handlePageLimits();
-  }
-  handlePageLimits() {
     this.page$.subscribe(page => {
-      if (page === this.pages[this.pages.length - 1]) {
-        this.nextButton.nativeElement.classList.add('disabled');
-      }
-      else {
-        this.nextButton.nativeElement.classList.remove('disabled');
-      }
-      if (page === this.pages[0]) {
-        this.previousButton.nativeElement.classList.add('disabled');
-      }
-      else {
-        this.previousButton.nativeElement.classList.remove('disabled');
-      }
+      this.currentPage = page;
     });
   }
 
