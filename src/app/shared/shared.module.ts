@@ -5,6 +5,7 @@ import { ProgressBarComponent } from './components/progress-bar/progress-bar.com
 import { UsersListComponent } from './components/users-list/users-list.component';
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { RouterModule } from '@angular/router';
+import { PaginationComponent } from './components/pagination/pagination.component';
 
 
 @NgModule({
@@ -12,7 +13,8 @@ import { RouterModule } from '@angular/router';
     HeaderComponent,
     ProgressBarComponent,
     UsersListComponent,
-    UserCardComponent
+    UserCardComponent,
+    PaginationComponent
   ],
   imports: [
     CommonModule,
@@ -22,7 +24,8 @@ import { RouterModule } from '@angular/router';
     HeaderComponent,
     ProgressBarComponent,
     UsersListComponent,
-    UserCardComponent
+    UserCardComponent,
+    PaginationComponent
   ]
 })
 export class SharedModule { }
