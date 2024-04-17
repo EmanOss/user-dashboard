@@ -1,5 +1,5 @@
 <div class="list-group">
-  <a *ngFor="let user of users" [routerLink]="['/user', user.id]" class="list-group-item list-group-item-action">
-    <app-user-card [user]="user" ></app-user-card>
+  <a *ngFor="let user of users$ | async" [routerLink]="['/user', user.id]" class="list-group-item list-group-item-action">
+    <app-user-card [user]="user"></app-user-card>
   </a>
 </div>

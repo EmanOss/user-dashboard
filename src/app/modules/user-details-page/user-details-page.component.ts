@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { User } from 'src/app/data/interfaces/user';
+import { UserService } from 'src/app/data/services/user.service';
 
 @Component({
   selector: 'app-user-details-page',
@@ -9,16 +10,17 @@ import { User } from 'src/app/data/interfaces/user';
 })
 export class UserDetailsPageComponent {
   userId: string | null = null;
-  user: User = {
-    id: '4',
-    email: 'hi@gmail.com',
-    first_name: 'John',
-    last_name: 'Doe',
-    avatar: 'https://reqres.in/img/faces/4-image.jpg'
-  }
-  
-  constructor(private route: ActivatedRoute) { }
+
+  user!: User;
+
+  constructor(private route: ActivatedRoute, private userService: UserService) { }
   ngOnInit(): void {
     this.userId = this.route.snapshot.paramMap.get('id');
+    if (this.userId) {
+      this.userService.getUserById(this.userId
+      ).subscribe((user) => {
+        this.user = user;
+      });
+    }
   }
 }

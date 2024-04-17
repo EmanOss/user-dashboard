@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { pageReducer } from './states/page/page.reducer';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { pageReducer } from './states/page/page.reducer';
     BrowserModule,
     AppRoutingModule,
     SharedModule,
-    StoreModule.forRoot({page: pageReducer}, {})
+    StoreModule.forRoot({page: pageReducer}, {}),
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],

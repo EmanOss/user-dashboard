@@ -1,5 +1,10 @@
 import { Component } from '@angular/core';
+import { Observable, switchMap } from 'rxjs';
 import { User } from 'src/app/data/interfaces/user';
+import { AppState } from 'src/app/states/app.state';
+import { Store } from '@ngrx/store';
+import { selectPage } from 'src/app/states/page/page.selector';
+import { UserService } from 'src/app/data/services/user.service';
 
 @Component({
   selector: 'app-home-page',
@@ -7,8 +12,18 @@ import { User } from 'src/app/data/interfaces/user';
   styleUrls: ['./home-page.component.scss']
 })
 export class HomePageComponent {
-  users: User[] = [{ id: '1', email: "george.bluth@reqres.in", first_name: "George", last_name: "Bluth", avatar: "https://reqres.in/img/faces/4-image.jpg" },
-  { id: '2', email: "charles.morris@reqres.in", first_name: "George", last_name: "Bluth", avatar: "https://reqres.in/img/faces/6-image.jpg" },
-  ]
+  page$: Observable<number>;
+  users$!: Observable<User[]>;
 
+  constructor(private store: Store<AppState>, private userService: UserService) {
+    this.page$ = this.store.select(selectPage);
+  }
+
+  ngOnInit(): void {
+    this.users$ = this.page$.pipe(
+      switchMap(page => {
+        return this.userService.getAllUsers(page);
+      })
+    );
+  }
 }
