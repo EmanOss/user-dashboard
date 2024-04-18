@@ -25,9 +25,6 @@ export class HomePageComponent {
     });
   }
 
-  ngOnInit(): void {
-  }
-
   fetchAllUsers() {
     this.users$ = this.page$.pipe(
       switchMap(page => {

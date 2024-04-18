@@ -1,9 +1,9 @@
-import { Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from 'src/app/states/app.state';
 import { nextPage, previousPage, setPage } from 'src/app/states/page/page.actions';
-import { selectPage } from 'src/app/states/page/page.selector';
+import { selectMaxPage, selectPage } from 'src/app/states/page/page.selector';
 
 @Component({
   selector: 'app-pagination',
@@ -11,15 +11,20 @@ import { selectPage } from 'src/app/states/page/page.selector';
   styleUrls: ['./pagination.component.scss'],
 })
 export class PaginationComponent {
-  @Input() pages: number[] = [1, 2, 3, 4];
   page$: Observable<number>;
+  maxPage$: Observable<number>;
   currentPage!: number;
+  pages: number[] = [];
 
 
   constructor(private store: Store<AppState>) {
     this.page$ = this.store.select(selectPage);
+    this.maxPage$ = this.store.select(selectMaxPage);
     this.page$.subscribe(page => {
       this.currentPage = page;
+    });
+    this.maxPage$.subscribe(maxPage => {
+      this.pages = Array.from({ length: maxPage }, (_, i) => i + 1);
     });
   }
 
