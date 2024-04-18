@@ -1,7 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+<<<<<<< Updated upstream
 import { Observable, map, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
+=======
+import { Observable, map, of, throwError } from 'rxjs';
+import { catchError, switchMap } from 'rxjs/operators';
+>>>>>>> Stashed changes
 import { User } from '../interfaces/user';
 import { environment } from 'src/environments/environment.development';
 import { ApiCacheService } from 'src/app/core/services/api-cache.service';
@@ -16,7 +21,11 @@ import { setMaxPage } from 'src/app/states/page/page.actions';
 export class UserService {
   maxPage$: Observable<number>;
 
+<<<<<<< Updated upstream
   constructor(private http: HttpClient, private apiCacheService: ApiCacheService, private store: Store<AppState>) {
+=======
+  constructor(private http: HttpClient, private apiCacheService: ApiCacheService, private store: Store<AppState>, private progressService: ProgressService) {
+>>>>>>> Stashed changes
     this.maxPage$ = this.store.select(selectMaxPage);
   }
 
@@ -32,9 +41,17 @@ export class UserService {
               this.store.dispatch(setMaxPage(response.total_pages))
               this.apiCacheService.set(url, response.data);
               return of(response.data);
+            }),
+            catchError(error => {
+              this.progressService.hide();
+              return throwError(() => error); 
             })
           );
         }
+      }),
+      catchError(error => {
+        this.progressService.hide();
+        return throwError(() => error); 
       })
     );
   }
@@ -51,9 +68,17 @@ export class UserService {
             switchMap(data => {
               this.apiCacheService.set(url, data);
               return of(data);
+            }),
+            catchError(error => {
+              this.progressService.hide();
+              return throwError(() => error); 
             })
           );
         }
+      }),
+      catchError(error => {
+        this.progressService.hide();
+        return throwError(() => error); 
       })
     );
   }
