@@ -8,3 +8,7 @@ export const selectPage = createSelector(
   selectPageState,
   (state) => state.page
 );
+export const selectMaxPage = createSelector(
+  selectPageState,
+  (state) => state.maxPage
+);

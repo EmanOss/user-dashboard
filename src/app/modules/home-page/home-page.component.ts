@@ -19,7 +19,7 @@ export class HomePageComponent {
     this.page$ = this.store.select(selectPage);
   }
 
-  ngOnInit(): void {
+  fetchAllUsers() {
     this.users$ = this.page$.pipe(
       switchMap(page => {
         return this.userService.getAllUsers(page);
