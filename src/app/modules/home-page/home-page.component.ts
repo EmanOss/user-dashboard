@@ -16,6 +16,7 @@ export class HomePageComponent {
   page$: Observable<number>;
   query$: Observable<string>;
   users$!: Observable<User[]>;
+  noSearchResult = false;
 
   constructor(private store: Store<AppState>, private userService: UserService) {
     this.page$ = this.store.select(selectPage);
@@ -37,8 +38,9 @@ export class HomePageComponent {
     if (!query) {
       this.fetchAllUsers();
     }
-    else{
-      this.users$ = this.userService.getUserById(query).pipe(map(user => [user]));
+    else {
+      this.users$ = this.userService.getUserById(query).pipe(map(user => [user]),
+    );
     }
   }
 }
