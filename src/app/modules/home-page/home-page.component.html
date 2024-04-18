@@ -1,4 +1,7 @@
 <app-users-list [users$]="users$"></app-users-list>
+<div *ngIf="(query$ | async) && !(users$ | async)" class="list-group-item">
+  <p class="text-center">No users found</p>
+</div>
 <div class="d-flex justify-content-center mt-3">
   <app-pagination></app-pagination>
 </div>

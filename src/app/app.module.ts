@@ -6,8 +6,9 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { pageReducer } from './states/page/page.reducer';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { queryReducer } from './states/query/query.reducer';
+import { ProgressInterceptor } from './core/interceptors/progress.interceptor';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,9 @@ import { queryReducer } from './states/query/query.reducer';
     }, {}),
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    // { provide: HTTP_INTERCEPTORS, useClass: ProgressInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent],
   exports: [
   ]
