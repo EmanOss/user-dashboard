@@ -1,5 +1,12 @@
 <div class="list-group">
-  <a *ngFor="let user of users$ | async" [routerLink]="['/user', user.id]" class="list-group-item list-group-item-action">
+  <a
+    *ngFor="let user of users$ | async"
+    [routerLink]="['/user', user.id]"
+    class="list-group-item list-group-item-action"
+  >
     <app-user-card [user]="user"></app-user-card>
   </a>
+  <div *ngIf="!(users$ | async)?.length" class="list-group-item">
+    <p class="text-center">No users found</p>
+  </div>
 </div>

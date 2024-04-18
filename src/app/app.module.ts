@@ -7,6 +7,7 @@ import { SharedModule } from './shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { pageReducer } from './states/page/page.reducer';
 import { HttpClientModule } from '@angular/common/http';
+import { queryReducer } from './states/query/query.reducer';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,10 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     SharedModule,
-    StoreModule.forRoot({page: pageReducer}, {}),
+    StoreModule.forRoot({
+      page: pageReducer,
+      query: queryReducer
+    }, {}),
     HttpClientModule
   ],
   providers: [],

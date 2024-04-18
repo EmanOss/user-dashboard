@@ -6,6 +6,8 @@ import { UsersListComponent } from './components/users-list/users-list.component
 import { UserCardComponent } from './components/user-card/user-card.component';
 import { RouterModule } from '@angular/router';
 import { PaginationComponent } from './components/pagination/pagination.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SearchInputComponent } from './components/header/search-input/search-input.component';
 
 
 @NgModule({
@@ -14,11 +16,13 @@ import { PaginationComponent } from './components/pagination/pagination.componen
     ProgressBarComponent,
     UsersListComponent,
     UserCardComponent,
-    PaginationComponent
+    PaginationComponent,
+    SearchInputComponent
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule
   ],
   exports: [
     HeaderComponent,
