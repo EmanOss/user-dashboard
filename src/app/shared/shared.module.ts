@@ -8,6 +8,7 @@ import { RouterModule } from '@angular/router';
 import { PaginationComponent } from './components/pagination/pagination.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SearchInputComponent } from './components/header/search-input/search-input.component';
+import { MouseAnimationDirective } from '../directives/mouse-animation.directive';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { SearchInputComponent } from './components/header/search-input/search-in
     UsersListComponent,
     UserCardComponent,
     PaginationComponent,
-    SearchInputComponent
+    SearchInputComponent,
+    MouseAnimationDirective,
   ],
   imports: [
     CommonModule,

@@ -10,6 +10,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 - Instatnt search by user ID
 - Cached API resposonses to improve performance
 - Progress bar to improve user experience
+- Highlight user name on mouse hover (using custom directive)
 
 ## Development server
 
@@ -26,6 +27,7 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The appli
 ![image](https://github.com/EmanOss/user-dashboard/assets/67837246/872f56d8-ea14-4fe1-bc2b-28c56ab477df)
 ### Progress Bar
 ![image](https://github.com/EmanOss/user-dashboard/assets/67837246/6fef810d-2ef4-48f6-aadf-5e831a6413f1)
-
+### Highlight user name on mouse hover
+![alt text](image.png)
 
 
