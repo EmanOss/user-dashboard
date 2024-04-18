@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map, of } from 'rxjs';
+import { switchMap } from 'rxjs/operators';
+import { Observable, map, of, throwError } from 'rxjs';
+import { catchError, switchMap } from 'rxjs/operators';
 import { delay, switchMap } from 'rxjs/operators';
 import { User } from '../interfaces/user';
 import { environment } from 'src/environments/environment.development';
@@ -17,6 +20,7 @@ import { ProgressService } from 'src/app/core/services/progress.service';
 export class UserService {
   maxPage$: Observable<number>;
 
+  constructor(private http: HttpClient, private apiCacheService: ApiCacheService, private store: Store<AppState>, private progressService: ProgressService) {
   constructor(
     private http: HttpClient,
     private apiCacheService: ApiCacheService,
@@ -41,9 +45,17 @@ export class UserService {
               this.apiCacheService.set(url, response.data);
               this.progressService.hide();
               return of(response.data);
+            }),
+            catchError(error => {
+              this.progressService.hide();
+              return throwError(() => error); 
             })
           );
         }
+      }),
+      catchError(error => {
+        this.progressService.hide();
+        return throwError(() => error); 
       })
     );
   }
@@ -63,9 +75,17 @@ export class UserService {
               this.apiCacheService.set(url, data);
               this.progressService.hide();
               return of(data);
+            }),
+            catchError(error => {
+              this.progressService.hide();
+              return throwError(() => error); 
             })
           );
         }
+      }),
+      catchError(error => {
+        this.progressService.hide();
+        return throwError(() => error); 
       })
     );
   }
